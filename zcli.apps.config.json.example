@@ -1,0 +1,10 @@
+//Remove all comments in real version
+// See https://banyanbotanicalssupport1611063386.zendesk.com/api/v2/apps/installations.json for app_id and installation_id after installing your app
+{
+  "app_id": 809340,
+  "installation_id": 360008867451,
+  "parameters": {
+    "someToken": "fksjdhfb231435",
+    "someSecret": 123
+  }
+}
