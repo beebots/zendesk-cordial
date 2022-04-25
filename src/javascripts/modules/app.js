@@ -1,22 +1,13 @@
-/**
- *  Example app
- **/
-
-import I18n from '../../javascripts/lib/i18n'
-import { resizeContainer, render } from '../../javascripts/lib/helpers'
-import getDefaultTemplate from '../../templates/default'
+import { resizeContainer } from '../lib/helpers'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Main from '../components/Main'
 
 const MAX_HEIGHT = 1000
-const API_ENDPOINTS = {
-  organizations: '/api/v2/organizations.json'
-}
 
 class App {
   constructor (client, appData) {
     this._client = client
-    this._appData = appData
-
-    this.states = {}
 
     // this.initializePromise is only used in testing
     // indicate app initilization(including all async operations) is complete
@@ -27,21 +18,10 @@ class App {
    * Initialize module, render main template
    */
   async init () {
-    const currentUser = (await this._client.get('currentUser')).currentUser
-    this.states.currentUserName = currentUser.name
-
-    I18n.loadTranslations(currentUser.locale)
-
-    const organizations = await this._client
-      .request(API_ENDPOINTS.organizations)
-      .catch(this._handleError.bind(this))
-
-    if (organizations) {
-      this.states.organizations = organizations.organizations
-
+    const ticketRequester = (await this._client.get('ticket.requester'))
+    if (ticketRequester && this._client) {
       // render application markup
-      render('.loader', getDefaultTemplate(this.states))
-
+        ReactDOM.render(<Main client={this._client} />, document.getElementById('main'))
       return resizeContainer(this._client, MAX_HEIGHT)
     }
   }
@@ -51,7 +31,7 @@ class App {
    * @param {Object} error error object
    */
   _handleError (error) {
-    console.log('An error is handled here: ', error.message)
+    console.log('Error: ', error.message)
   }
 }
 
