@@ -6,7 +6,7 @@ const Main = (props) => {
     <div className="App">
       <div className="info-block">
         <div className="block-title">
-          <h2>Customer Info</h2>
+          <h2 className="text-lg">Customer Info</h2>
         </div>
         <div className="block-content">
           <p>{props.requester ? props.requester.name : ''}</p>
