@@ -74,6 +74,7 @@ module.exports = {
     // Copy over static assets
     new CopyWebpackPlugin([
       { from: 'src/manifest.json', to: '../', flatten: true },
+      { from: 'zcli.apps.config.json', to: '../', flatten: true },
       { from: 'src/images/*', to: '.', flatten: true }
     ]),
 

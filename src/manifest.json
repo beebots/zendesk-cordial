@@ -15,6 +15,15 @@
       }
     }
   },
+  "domainWhitelist": ["api.usw2.cordial.io", "api.cordial.io"],
+  "parameters": [
+    {
+      "name": "api_token",
+      "type": "text",
+      "secure": true,
+      "required": true
+    }
+  ],
   "version": "1.0",
   "frameworkVersion": "2.0"
 }
