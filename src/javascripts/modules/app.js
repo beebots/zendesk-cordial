@@ -31,7 +31,7 @@ class App {
     let cordialContact = (await this.cordialApi.getContact(ticketRequester.email))
 
     // render application markup
-    ReactDOM.render(<Main requester={ticketRequester} client={this.client}/>, document.getElementById('main'))
+    ReactDOM.render(<Main requester={ticketRequester} cordialContact={cordialContact} cordialApi={this.cordialApi} />, document.getElementById('main'))
     return resizeContainer(this.client, MAX_HEIGHT)
   }
 

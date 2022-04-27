@@ -54,3 +54,7 @@ export function escapeSpecialChars (str) {
 
   return str.replace(/[&<>"'`=]/g, function (m) { return escape[m] })
 }
+
+export function capitalize(string) {
+  return string && string[0].toUpperCase() + string.slice(1);
+}
