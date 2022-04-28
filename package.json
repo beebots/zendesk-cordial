@@ -17,6 +17,8 @@
     "@zendeskgarden/css-tables": "^3.0.5",
     "@zendeskgarden/react-buttons": "^8.49.4",
     "@zendeskgarden/react-grid": "^8.49.4",
+    "@zendeskgarden/react-loaders": "^8.49.4",
+    "@zendeskgarden/react-notifications": "^8.49.4",
     "@zendeskgarden/react-theming": "^8.1.0",
     "@zendeskgarden/tailwindcss": "^3.0.1",
     "babel-jest": "^27.5.1",

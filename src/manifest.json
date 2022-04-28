@@ -18,6 +18,13 @@
   "domainWhitelist": ["api.usw2.cordial.io", "api.cordial.io"],
   "parameters": [
     {
+      "name": "api_url",
+      "type": "text",
+      "secure": false,
+      "required": true,
+      "default": "https://api.usw2.cordial.io"
+    },
+    {
       "name": "api_token",
       "type": "text",
       "secure": true,

@@ -1,40 +1,36 @@
-const API_URL_BASE = 'https://api.usw2.cordial.io/v2' //TODO : pull from settings
-const API_URL_CONTACT = `${API_URL_BASE}/contacts`
+const auth_headers = {
+  "Authorization": "Basic {{setting.api_token}}",
+  "Accept": "application/json"
+}
 
 class CordialApi {
+  client;
+  apiUrl;
+  apiUrlContact;
 
-  constructor (client) {
+  constructor (client, apiUrl) {
     this.client = client
+    this.apiUrl = `${apiUrl}/v2`
+    this.apiUrlContact = `${this.apiUrl}/contacts`
   }
 
   async getContact (email) {
-    console.log('getContact Was called with email: ', email)
     const encodedEmail = encodeURIComponent(email.toLowerCase());
     const settings = {
-      url: `${API_URL_CONTACT}/email:${encodedEmail}`,
-      headers: {
-        "Authorization": "Basic {{setting.api_token}}",
-        "Accept": "application/json"
-      },
+      url: `${this.apiUrlContact}/email:${encodedEmail}`,
+      headers: auth_headers,
       secure: true,
       type: 'GET'
     };
 
-    return await this.client.request(settings)
-      .catch((error) => {
-        console.log(error)
-      })
+    return (await this.client.request(settings))
   }
 
   async updateContact (email, data) {
-    console.log('updateContact Was called with: ', email, data)
     const encodedEmail = encodeURIComponent(email.toLowerCase());
     const settings = {
-      url: `${API_URL_CONTACT}/email:${encodedEmail}`,
-      headers: {
-        "Authorization": "Basic {{setting.api_token}}",
-        "Accept": "application/json"
-      },
+      url: `${this.apiUrlContact}/email:${encodedEmail}`,
+      headers: auth_headers,
       data: data,
       secure: true,
       type: 'PUT'
@@ -43,13 +39,9 @@ class CordialApi {
   }
 
   async createContact (email, data) {
-    console.log('createContact Was called with: ', email, data)
     const settings = {
-      url: API_URL_CONTACT,
-      headers: {
-        "Authorization": "Basic {{setting.api_token}}",
-        "Accept": "application/json"
-      },
+      url: this.apiUrlContact,
+      headers: auth_headers,
       data: data,
       secure: true,
       type: 'POST'
@@ -61,12 +53,10 @@ class CordialApi {
     try {
       return (await this.updateContact(email, data))
     } catch (exception){
-      console.log('exception happening', exception)
       if (exception?.responseJSON?.errorKey === 'CONTACTS_CONTACT_NOT_FOUND') {
-        console.log('here')
         return (await this.createContact(email, data))
       }
-      console.log('Something went wrong')
+      console.log('Something went wrong: ', exception)
     }
   }
 }

@@ -2,11 +2,17 @@ import React, { useState } from 'react'
 import { capitalize } from '../lib/helpers'
 import { Field, Label, Radio } from '@zendeskgarden/react-forms'
 import { Button } from '@zendeskgarden/react-buttons'
+import { Dots, Spinner } from '@zendeskgarden/react-loaders'
+import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
 
 const subscribeStatusDateKeyMap = {
   subscribe: 'subscribedAt',
   unsubscribe: 'unsubscribedAt',
 }
+
+const SUBSCRIBED = 'subscribed'
+const UNSUBSCRIBED = 'unsubscribed'
+const NONE = 'none'
 
 const SubscriptionStatus = (props) => {
   if (!props.requester) {
@@ -19,7 +25,7 @@ const SubscriptionStatus = (props) => {
   )
 
   // The key for the date changes depending on the status. EG: 'unsubscribedAt' or 'subscribedAt'
-  const subscribeStatusDateKey = subscribeStatusDateKeyMap[subscribeStatus];
+  const subscribeStatusDateKey = subscribeStatusDateKeyMap[subscribeStatus]
   const [subscribeStatusDate, setSubscribeStatusDate] = useState(
     subscribeStatusDateKey
       ? new Date(props.cordialContact.channels.email[subscribeStatusDateKey])
@@ -27,7 +33,10 @@ const SubscriptionStatus = (props) => {
   )
 
   // This is used for the radio button values
-  const [subscribeStatusValue, setRadioValue] = useState(subscribeStatus);
+  const [subscribeStatusValue, setRadioValue] = useState(subscribeStatus)
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [messages, setMessages] = useState([])
 
   const saveSubscribeStatus = () => {
     if (!props.requester.email) {
@@ -44,29 +53,39 @@ const SubscriptionStatus = (props) => {
       forceSubscribe: true
     }
 
-    //todo: Start a loader
+    setIsLoading(true)
     props.cordialApi.addOrUpdateContact(email, data)
       .then((data) => {
+        setIsLoading(false)
         if (data && data.success !== true) {
-          //todo: show error message
+          setMessages([{type: 'error', title: 'Oh dang!', value: 'There was a problem communicating with Cordial'}])
           return;
         }
-        //todo: show success message
+        setMessages([])
         setSubscribeStatus(subscribeStatusValue)
-        setSubscribeStatusDate(new Date())
+        let statusDate = null
+        if (subscribeStatusValue === SUBSCRIBED
+          || subscribeStatusValue === UNSUBSCRIBED) {
+          statusDate = new Date()
+        }
+        setSubscribeStatusDate(statusDate)
       })
       .catch((error) => {
-        //todo: show error message
+        setIsLoading(false)
+        setMessages([{type: 'error', title: 'Hmmm. =/', value: 'There was a problem communicating with Cordial'}])
         console.log(error)
       })
-      .finally(
-        //todo: stop loader
-      )
-
   }
 
   return (
     <div>
+        { messages.map((message, index) =>
+          <Alert key={index} className="my-1" type={message.type}>
+            <Title>{message.title}</Title>
+            {message.value}
+            <Close aria-label="Close Alert" />
+          </Alert>
+        )}
         <h2 className="text-lg font-bold">Subscription Status</h2>
         <div className="mb-4">
           <p className="mb-4">{ subscribeStatus
@@ -77,8 +96,8 @@ const SubscriptionStatus = (props) => {
           <Field>
             <Radio
               name="default example"
-              value="subscribed"
-              checked={subscribeStatusValue === 'subscribed'}
+              value={SUBSCRIBED}
+              checked={subscribeStatusValue === SUBSCRIBED}
               onChange={event => setRadioValue(event.target.value)}
             >
               <Label>Subscribed</Label>
@@ -87,8 +106,8 @@ const SubscriptionStatus = (props) => {
           <Field>
             <Radio
               name="default example"
-              value="unsubscribed"
-              checked={subscribeStatusValue === 'unsubscribed'}
+              value={UNSUBSCRIBED}
+              checked={subscribeStatusValue === UNSUBSCRIBED}
               onChange={event => setRadioValue(event.target.value)}
             >
               <Label>Unsubscribed</Label>
@@ -97,15 +116,20 @@ const SubscriptionStatus = (props) => {
           <Field>
             <Radio
               name="default example"
-              value="none"
-              checked={subscribeStatusValue === 'none'}
+              value={NONE}
+              checked={subscribeStatusValue === NONE}
               onChange={event => setRadioValue(event.target.value)}
             >
               <Label>None</Label>
             </Radio>
           </Field>
           <div className="mt-4">
-            <Button onClick={saveSubscribeStatus}>Save</Button>
+            <Button onClick={saveSubscribeStatus}>
+              { isLoading
+                ? <span>Saving <Dots /></span>
+                : <>Save</>
+              }
+            </Button>
           </div>
         </div>
     </div>
