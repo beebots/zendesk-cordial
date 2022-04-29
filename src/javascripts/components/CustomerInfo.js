@@ -1,3 +1,4 @@
+import React from 'react'
 const CustomerInfo = (props) => {
   return (
     <div className="mb-4">
