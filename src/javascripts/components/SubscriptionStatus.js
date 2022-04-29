@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { capitalize } from '../lib/helpers'
 import { Field, Label, Radio } from '@zendeskgarden/react-forms'
 import { Button } from '@zendeskgarden/react-buttons'
-import { Dots, Spinner } from '@zendeskgarden/react-loaders'
+import { Dots } from '@zendeskgarden/react-loaders'
 import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
 
 const subscribeStatusDateKeyMap = {
@@ -58,7 +58,7 @@ const SubscriptionStatus = (props) => {
       .then((data) => {
         setIsLoading(false)
         if (data && data.success !== true) {
-          setMessages([{type: 'error', title: 'Oh dang!', value: 'There was a problem communicating with Cordial'}])
+          setMessages([{type: 'error', title: 'Uh oh!', value: 'There was a problem communicating with Cordial'}])
           return;
         }
         setMessages([])
@@ -69,6 +69,7 @@ const SubscriptionStatus = (props) => {
           statusDate = new Date()
         }
         setSubscribeStatusDate(statusDate)
+        props.onCordialContactUpdate()
       })
       .catch((error) => {
         setIsLoading(false)
