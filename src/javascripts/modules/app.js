@@ -9,7 +9,8 @@ const MAX_HEIGHT = 1000
 class App {
   constructor (client, appData) {
     this.client = client
-    this.cordialApi = new CordialApi(client, appData.metadata.settings.api_url)
+    console.log(appData)
+    this.cordialApi = new CordialApi(client, appData.metadata.settings.api_url, appData.metadata.settings.contact_attributes)
     this.appData = appData
 
     // this.initializePromise is only used in testing

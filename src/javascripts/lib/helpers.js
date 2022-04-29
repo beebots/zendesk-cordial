@@ -56,5 +56,12 @@ export function escapeSpecialChars (str) {
 }
 
 export function capitalize(string) {
-  return string && string[0].toUpperCase() + string.slice(1);
+  return string && string[0].toUpperCase() + string.slice(1)
+}
+
+export function arrayFromMultilineString(string) {
+  return string
+    && string
+      .split('\n')
+      .trim()
 }
