@@ -6,7 +6,7 @@ import ContactAttribute from './CustomerInfo/ContactAttribute'
 const CustomerInfo = (props) => {
   const [isEditing, setIsEditing] = useState(false)
 
-  function handleEditClick(){
+  function toggleEdit(){
     if (isEditing) {
       setIsEditing(false)
       return
@@ -19,7 +19,8 @@ const CustomerInfo = (props) => {
       <Paragraph>{props.email}</Paragraph>
       <LG tag="h2" isBold>
         Contact Info
-        <IconButton onClick={handleEditClick} aria-label="Edit" >
+        {' '}
+        <IconButton onClick={toggleEdit} aria-label="Edit" >
           <PencilIcon />
         </IconButton>
       </LG>
@@ -27,7 +28,11 @@ const CustomerInfo = (props) => {
         return <ContactAttribute key={contactAttribute.key} label={contactAttribute.name} value={props.cordialContact.attributes[contactAttribute.key]} type={contactAttribute.type} isEditing={isEditing} />
       })}
       { isEditing &&
-        <Button>Save</Button>
+        <div>
+          <Button isPrimary>Save</Button>
+          {' '}
+          <Button isBasic onClick={toggleEdit}>Cancel</Button>
+        </div>
       }
     </div>
   )

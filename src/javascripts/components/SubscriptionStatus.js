@@ -82,7 +82,7 @@ const SubscriptionStatus = (props) => {
       })
   }
 
-  function handleEditClick(){
+  function toggleEdit(){
     if (isEditing) {
       setIsEditing(false)
       return
@@ -101,7 +101,8 @@ const SubscriptionStatus = (props) => {
       )}
       <LG tag="h2" isBold>
         Subscription Status
-        <IconButton onClick={handleEditClick} aria-label="Edit">
+        {' '}
+        <IconButton onClick={toggleEdit} aria-label="Edit">
           <PencilIcon />
         </IconButton>
       </LG>
@@ -150,6 +151,8 @@ const SubscriptionStatus = (props) => {
                     : <>Save</>
                   }
                 </Button>
+                {' '}
+                <Button isBasic onClick={toggleEdit}>Cancel</Button>
               </div>
             </div>
           }
