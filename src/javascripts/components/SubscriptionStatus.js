@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { capitalize } from '../lib/helpers'
+import PencilIcon from '@zendeskgarden/svg-icons/src/16/pencil-stroke.svg'
 import { Field, Label, Radio } from '@zendeskgarden/react-forms'
-import { Button } from '@zendeskgarden/react-buttons'
+import { Button, IconButton } from '@zendeskgarden/react-buttons'
 import { Dots } from '@zendeskgarden/react-loaders'
 import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
 import { LG } from '@zendeskgarden/react-typography'
@@ -37,6 +38,7 @@ const SubscriptionStatus = (props) => {
   const [subscribeStatusValue, setRadioValue] = useState(subscribeStatus)
 
   const [isLoading, setIsLoading] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [messages, setMessages] = useState([])
 
   const saveSubscribeStatus = () => {
@@ -70,6 +72,7 @@ const SubscriptionStatus = (props) => {
           statusDate = new Date()
         }
         setSubscribeStatusDate(statusDate)
+        setIsEditing(false)
         props.onCordialContactUpdate()
       })
       .catch((error) => {
@@ -77,6 +80,14 @@ const SubscriptionStatus = (props) => {
         setMessages([{type: 'error', title: 'Hmmm. =/', value: 'There was a problem communicating with Cordial'}])
         console.log(error)
       })
+  }
+
+  function handleEditClick(){
+    if (isEditing) {
+      setIsEditing(false)
+      return
+    }
+    setIsEditing(true)
   }
 
   return (
@@ -88,51 +99,60 @@ const SubscriptionStatus = (props) => {
           <Close aria-label="Close Alert" />
         </Alert>
       )}
-      <LG tag="h2" isBold>Subscription Status</LG>
+      <LG tag="h2" isBold>
+        Subscription Status
+        <IconButton onClick={handleEditClick} aria-label="Edit">
+          <PencilIcon />
+        </IconButton>
+      </LG>
         <div className="mb-4">
           <p className="mb-4">{ subscribeStatus
             ? <span>{capitalize(subscribeStatus)}{subscribeStatusDate && <> on {subscribeStatusDate.toLocaleTimeString()}</>}</span>
             : <span>This email is not in Cordial</span>
           }
           </p>
-          <Field>
-            <Radio
-              name="default example"
-              value={SUBSCRIBED}
-              checked={subscribeStatusValue === SUBSCRIBED}
-              onChange={event => setRadioValue(event.target.value)}
-            >
-              <Label>Subscribed</Label>
-            </Radio>
-          </Field>
-          <Field>
-            <Radio
-              name="default example"
-              value={UNSUBSCRIBED}
-              checked={subscribeStatusValue === UNSUBSCRIBED}
-              onChange={event => setRadioValue(event.target.value)}
-            >
-              <Label>Unsubscribed</Label>
-            </Radio>
-          </Field>
-          <Field>
-            <Radio
-              name="default example"
-              value={NONE}
-              checked={subscribeStatusValue === NONE}
-              onChange={event => setRadioValue(event.target.value)}
-            >
-              <Label>None</Label>
-            </Radio>
-          </Field>
-          <div className="mt-4">
-            <Button onClick={saveSubscribeStatus}>
-              { isLoading
-                ? <span>Saving <Dots /></span>
-                : <>Save</>
-              }
-            </Button>
-          </div>
+          { isEditing &&
+            <div>
+              <Field>
+                <Radio
+                  name="default example"
+                  value={SUBSCRIBED}
+                  checked={subscribeStatusValue === SUBSCRIBED}
+                  onChange={event => setRadioValue(event.target.value)}
+                >
+                  <Label>Subscribed</Label>
+                </Radio>
+              </Field>
+              <Field>
+                <Radio
+                  name="default example"
+                  value={UNSUBSCRIBED}
+                  checked={subscribeStatusValue === UNSUBSCRIBED}
+                  onChange={event => setRadioValue(event.target.value)}
+                >
+                  <Label>Unsubscribed</Label>
+                </Radio>
+              </Field>
+              <Field>
+                <Radio
+                  name="default example"
+                  value={NONE}
+                  checked={subscribeStatusValue === NONE}
+                  onChange={event => setRadioValue(event.target.value)}
+                >
+                  <Label>None</Label>
+                </Radio>
+              </Field>
+              <div className="mt-4">
+                <Button onClick={saveSubscribeStatus}>
+                  { isLoading
+                    ? <span>Saving <Dots /></span>
+                    : <>Save</>
+                  }
+                </Button>
+              </div>
+            </div>
+          }
         </div>
     </div>
   )

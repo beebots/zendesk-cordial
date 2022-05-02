@@ -1,25 +1,33 @@
-import React from 'react'
-import { LG, MD, Paragraph } from '@zendeskgarden/react-typography'
+import React, { useState } from 'react'
+import { LG, Paragraph } from '@zendeskgarden/react-typography'
+import { Button, IconButton } from '@zendeskgarden/react-buttons'
+import PencilIcon from '@zendeskgarden/svg-icons/src/16/pencil-stroke.svg';
+import ContactAttribute from './CustomerInfo/ContactAttribute'
 const CustomerInfo = (props) => {
+  const [isEditing, setIsEditing] = useState(false)
 
+  function handleEditClick(){
+    if (isEditing) {
+      setIsEditing(false)
+      return
+    }
+    setIsEditing(true)
+  }
 
   return (
-    <div className="mb-4">
-      <LG tag="h2" isBold>Contact Attributes</LG>
+    <div className="mb-2">
       <Paragraph>{props.email}</Paragraph>
-      {Object.keys(props.cordialContact.attributes).length &&
-        <div>
-          { props.allowedContactAttributes.map((contactAttribute, index) => {
-            if (typeof contactAttribute.type !== 'string'
-              && typeof contactAttribute.type !== 'number' ) {
-              return <MD key={index}>Unsupported contact attribute type {attributeKey}</MD>
-            }
-            return <MD key={index}>
-              <MD tag="strong" isBold>{contactAttribute.name}: </MD>
-              <MD tag="span">{props.cordialContact.attributes[contactAttribute.key]}</MD>
-            </MD>
-          })}
-        </div>
+      <LG tag="h2" isBold>
+        Contact Info
+        <IconButton onClick={handleEditClick} aria-label="Edit" >
+          <PencilIcon />
+        </IconButton>
+      </LG>
+      { props.allowedContactAttributes.map((contactAttribute) => {
+        return <ContactAttribute key={contactAttribute.key} label={contactAttribute.name} value={props.cordialContact.attributes[contactAttribute.key]} type={contactAttribute.type} isEditing={isEditing} />
+      })}
+      { isEditing &&
+        <Button>Save</Button>
       }
     </div>
   )

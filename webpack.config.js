@@ -64,6 +64,10 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.svg$/,
+          use: ['@svgr/webpack'],
+        },
+        {
           test: /\.(js|jsx)$/,
           use: { loader: 'babel-loader' }
         },
@@ -80,7 +84,7 @@ module.exports = (env, argv) => {
             {loader: 'css-loader', options: { url: false }},
             'postcss-loader'
           ]
-        }
+        },
       ]
     },
 
