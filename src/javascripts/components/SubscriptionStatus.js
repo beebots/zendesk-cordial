@@ -8,8 +8,8 @@ import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
 import { LG } from '@zendeskgarden/react-typography'
 
 const subscribeStatusDateKeyMap = {
-  subscribe: 'subscribedAt',
-  unsubscribe: 'unsubscribedAt',
+  subscribed: 'subscribedAt',
+  unsubscribed: 'unsubscribedAt',
 }
 
 const SUBSCRIBED = 'subscribed'
@@ -26,7 +26,7 @@ const SubscriptionStatus = (props) => {
     : null
   )
 
-  // The key for the date changes depending on the status. EG: 'unsubscribedAt' or 'subscribedAt'
+  // The key for the date changes depending on the status. Example: 'unsubscribedAt' or 'subscribedAt'
   const subscribeStatusDateKey = subscribeStatusDateKeyMap[subscribeStatus]
   const [subscribeStatusDate, setSubscribeStatusDate] = useState(
     subscribeStatusDateKey
