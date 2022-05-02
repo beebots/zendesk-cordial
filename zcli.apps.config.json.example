@@ -1,10 +1,12 @@
 //Remove all comments in real version
 // See https://banyanbotanicalssupport1611063386.zendesk.com/api/v2/apps/installations.json for app_id and installation_id after installing your app
 {
-  "app_id": 809340,
-  "installation_id": 360008867451,
+  "plan": "silver",
+  "app_id": 809773,
+  "installation_id": 360008974052,
   "parameters": {
-    "someToken": "fksjdhfb231435",
-    "someSecret": 123
+    "api_url": "https://api.usw2.cordial.io",
+    "api_token": "REPLACE", //This should be yourkey with a colon at the end and base64 encoded. IE: btoa('YOUR_API_KEY' + ':')
+    "allowed_contact_attributes": "first_name\nlast_name"
   }
 }

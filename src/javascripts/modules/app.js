@@ -1,17 +1,17 @@
-import { resizeContainer } from '../lib/helpers'
+import { arrayFromMultilineString, resizeContainer } from '../lib/helpers'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Main from '../components/Main'
 import CordialApi from '../lib/cordialApi'
+import CordialAttributeHelper from '../lib/cordialAttributeHelper'
 
 const MAX_HEIGHT = 1000
 
 class App {
   constructor (client, appData) {
     this.client = client
-    console.log(appData)
-    this.cordialApi = new CordialApi(client, appData.metadata.settings.api_url, appData.metadata.settings.contact_attributes)
-    this.appData = appData
+    this.cordialApi = new CordialApi(client, appData.metadata.settings.api_url, this.allowedContactAttributes)
+    this.cordialAttributeHelper = new CordialAttributeHelper(this.cordialApi, appData.metadata.settings.allowed_contact_attributes)
 
     // this.initializePromise is only used in testing
     // indicate app initialization(including all async operations) is complete
@@ -37,8 +37,9 @@ class App {
         console.log('Error while getting a Cordial contact', exception)
       }
     }
+    this.allowedContactAttributes = (await this.cordialAttributeHelper.getAllowedAttributes())
     // render application markup
-    ReactDOM.render(<Main requester={ticketRequester} cordialContact={cordialContact} cordialApi={this.cordialApi} />, document.getElementById('main'))
+    ReactDOM.render(<Main requester={ticketRequester} cordialContact={cordialContact} cordialApi={this.cordialApi} allowedContactAttributes={this.allowedContactAttributes} />, document.getElementById('main'))
     return resizeContainer(this.client, MAX_HEIGHT)
   }
 

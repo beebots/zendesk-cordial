@@ -62,6 +62,7 @@ export function capitalize(string) {
 export function arrayFromMultilineString(string) {
   return string
     && string
-      .split('\n')
       .trim()
+      .split('\n')
+      .map((item) => item.trim())
 }

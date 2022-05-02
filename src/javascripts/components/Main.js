@@ -10,7 +10,7 @@ const Main = (props) => {
 
   return (
     <div className="app">
-      <CustomerInfo name={props.requester.name} email={props.requester.email} />
+      <CustomerInfo name={props.requester.name} email={props.requester.email} cordialContact={props.cordialContact} allowedContactAttributes={props.allowedContactAttributes} />
       <SubscriptionStatus requester={props.requester} cordialContact={props.cordialContact} cordialApi={props.cordialApi} onCordialContactUpdate={onCordialContactUpdate} />
       <SubscriberEvents />
     </div>

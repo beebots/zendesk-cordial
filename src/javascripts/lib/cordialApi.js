@@ -6,16 +6,11 @@ const auth_headers = {
 }
 
 class CordialApi {
-  client;
-  apiUrl;
-  apiUrlContact;
-  contactAttributes;
-
-  constructor (client, apiUrl, contactAttributesConfig) {
+  constructor (client, apiUrl) {
     this.client = client
     this.apiUrl = `${apiUrl}/v2`
     this.apiUrlContact = `${this.apiUrl}/contacts`
-    this.contactAttributes = arrayFromMultilineString(contactAttributesConfig)
+    this.apiUrlContactAttributes = `${this.apiUrl}/accountcontactattributes`
   };
 
   async getContact (email) {
@@ -53,6 +48,16 @@ class CordialApi {
     return (await this.client.request(settings))
   }
 
+  async getAllContactAttributes () {
+    const settings = {
+      url: `${this.apiUrlContactAttributes}`,
+      headers: auth_headers,
+      secure: true,
+      type: 'GET'
+    };
+    return (await this.client.request(settings))
+  }
+
   async addOrUpdateContact (email, data) {
     try {
       return (await this.updateContact(email, data))
@@ -63,6 +68,7 @@ class CordialApi {
       console.log('Something went wrong: ', exception)
     }
   }
+
 }
 
 export default CordialApi

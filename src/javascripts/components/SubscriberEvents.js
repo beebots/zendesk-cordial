@@ -1,8 +1,9 @@
 import React from 'react'
+import { LG } from '@zendeskgarden/react-typography'
 const SubscriberEvents = (props) => {
   return (
     <div className="mb-4">
-      <h2 className="text-lg font-bold">Recent Events</h2>
+      <LG tag="h2" isBold>Recent Events</LG>
       <p className="activity-detail">Massage Oil sent 3/30/2022</p>
       <p className="activity-detail">Massage Oil sent 3/30/2022</p>
       <p className="activity-detail">Massage Oil sent 3/30/2022</p>

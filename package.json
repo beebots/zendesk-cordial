@@ -20,6 +20,7 @@
     "@zendeskgarden/react-loaders": "^8.49.4",
     "@zendeskgarden/react-notifications": "^8.49.4",
     "@zendeskgarden/react-theming": "^8.1.0",
+    "@zendeskgarden/react-typography": "^8.49.4",
     "@zendeskgarden/tailwindcss": "^3.0.1",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.5",

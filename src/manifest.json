@@ -31,7 +31,7 @@
       "required": true
     },
     {
-      "name": "contact_attributes",
+      "name": "allowed_contact_attributes",
       "type": "multiline",
       "secure": false,
       "required": false,

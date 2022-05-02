@@ -1404,6 +1404,16 @@
   dependencies:
     "@babel/runtime" "^7.8.4"
 
+"@zendeskgarden/container-scrollregion@^0.1.0":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-scrollregion/-/container-scrollregion-0.1.4.tgz#d259e3624ece24991e5e681e7a3b0dba020ed041"
+  integrity sha512-oWqtk3Dmn4+8OIXCt+WByCHZwm2nsIJrTb8dbIkDbznOLfypR4JjgAfRFp9jIoS34I0RUzsv3ydjRCKE8jNUEQ==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    lodash.debounce "^4.0.8"
+    prop-types "^15.7.2"
+    react-merge-refs "^1.1.0"
+
 "@zendeskgarden/container-selection@^1.3.18":
   version "1.3.18"
   resolved "https://registry.yarnpkg.com/@zendeskgarden/container-selection/-/container-selection-1.3.18.tgz#de2ac533c8dad2d3eee6b472802013b9e0b04920"
@@ -1524,6 +1534,16 @@
     "@zendeskgarden/container-focusvisible" "^0.4.6"
     "@zendeskgarden/container-utilities" "^0.7.0"
     polished "^4.0.0"
+    prop-types "^15.5.7"
+
+"@zendeskgarden/react-typography@^8.49.4":
+  version "8.49.4"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/react-typography/-/react-typography-8.49.4.tgz#8fd0fce16e54ac1a057c44fe55e694372109b054"
+  integrity sha512-qSk3Hnw0vqq6emErBWXpG2LpKSQ18ZoD6f7oW2PGbkD5EbsCb5YrFWAlXrrOzqJzC+0miQEBj1IInso7BmJLNQ==
+  dependencies:
+    "@zendeskgarden/container-scrollregion" "^0.1.0"
+    polished "^4.0.0"
+    prism-react-renderer "^1.1.1"
     prop-types "^15.5.7"
 
 "@zendeskgarden/tailwindcss@^3.0.1":
@@ -8133,6 +8153,11 @@ pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
+prism-react-renderer@^1.1.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.3.1.tgz#88fc9d0df6bed06ca2b9097421349f8c2f24e30d"
+  integrity sha512-xUeDMEz074d0zc5y6rxiMp/dlC7C+5IDDlaEUlcBOFE2wddz7hz5PNupb087mPwTt7T9BrFmewObfCBuf/LKwQ==
+
 private@^0.1.6, private@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
@@ -8166,7 +8191,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==

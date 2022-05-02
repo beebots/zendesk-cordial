@@ -4,6 +4,7 @@ import { Field, Label, Radio } from '@zendeskgarden/react-forms'
 import { Button } from '@zendeskgarden/react-buttons'
 import { Dots } from '@zendeskgarden/react-loaders'
 import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
+import { LG } from '@zendeskgarden/react-typography'
 
 const subscribeStatusDateKeyMap = {
   subscribe: 'subscribedAt',
@@ -80,14 +81,14 @@ const SubscriptionStatus = (props) => {
 
   return (
     <div>
-        { messages.map((message, index) =>
-          <Alert key={index} className="my-1" type={message.type}>
-            <Title>{message.title}</Title>
-            {message.value}
-            <Close aria-label="Close Alert" />
-          </Alert>
-        )}
-        <h2 className="text-lg font-bold">Subscription Status</h2>
+      { messages.map((message, index) =>
+        <Alert key={index} className="my-1" type={message.type}>
+          <Title>{message.title}</Title>
+          {message.value}
+          <Close aria-label="Close Alert" />
+        </Alert>
+      )}
+      <LG tag="h2" isBold>Subscription Status</LG>
         <div className="mb-4">
           <p className="mb-4">{ subscribeStatus
             ? <span>{capitalize(subscribeStatus)}{subscribeStatusDate && <> on {subscribeStatusDate.toLocaleTimeString()}</>}</span>
