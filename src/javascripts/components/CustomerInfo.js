@@ -19,10 +19,6 @@ const CustomerInfo = (props) => {
     setIsEditing(true)
   }
 
-  useLayoutEffect(() => {
-    props.resizeHelper.resize()
-  })
-
   function initializeContactAttributeValues(){
     return props.allowedContactAttributes.reduce((result, contactAttribute) => {
       let contact = { ...contactAttribute }
@@ -45,6 +41,10 @@ const CustomerInfo = (props) => {
     }
     setContactAttributeValues(newContactAttributes)
   }
+
+  useLayoutEffect(() => {
+    props.resizeHelper.resize()
+  }, [contactAttributeValues, isEditing])
 
   function handleContactAttributeSave(){
     const email = props.email.toLowerCase()

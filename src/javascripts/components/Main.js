@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SubscriptionStatus from './SubscriptionStatus'
 import CustomerInfo from './CustomerInfo'
 import SubscriberEvents from './SubscriberEvents'
@@ -7,10 +7,6 @@ const Main = (props) => {
   if (!props.requester.email) {
     return (<p>No requester email available on the ticket</p>);
   }
-
-  useEffect(() => {
-    props.windowResizeHelper.resize()
-  })
 
   const onCordialContactUpdate = () => {
     console.log('cordial contact was updated!')

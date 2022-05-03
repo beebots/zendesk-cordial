@@ -25,7 +25,7 @@ const SubscriberEvents = (props) => {
 
   useLayoutEffect(() => {
     props.resizeHelper.resize()
-  })
+  }, [events])
 
   return (
     <div className="mb-4">
