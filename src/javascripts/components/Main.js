@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import SubscriptionStatus from './SubscriptionStatus'
 import CustomerInfo from './CustomerInfo'
 import SubscriberEvents from './SubscriberEvents'
@@ -7,6 +7,10 @@ const Main = (props) => {
   if (!props.requester.email) {
     return (<p>No requester email available on the ticket</p>);
   }
+
+  useLayoutEffect(() => {
+    props.windowResizeHelper.resize()
+  })
 
   const onCordialContactUpdate = () => {
     console.log('cordial contact was updated!')
@@ -32,6 +36,7 @@ const Main = (props) => {
         email={props.requester.email}
         cordialApi={props.cordialApi}
         cordialContact={props.cordialContact}
+        resizeHelper={props.windowResizeHelper}
       />
     </div>
   )

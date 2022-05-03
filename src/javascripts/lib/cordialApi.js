@@ -1,5 +1,3 @@
-import { arrayFromMultilineString } from './helpers'
-
 const auth_headers = {
   "Authorization": "Basic {{setting.api_token}}",
   "Accept": "application/json"
@@ -11,6 +9,7 @@ class CordialApi {
     this.apiUrl = `${apiUrl}/v2`
     this.apiUrlContact = `${this.apiUrl}/contacts`
     this.apiUrlContactAttributes = `${this.apiUrl}/accountcontactattributes`
+    this.apiUrlContactActivities = `${this.apiUrl}/contactactivities`
   };
 
   async getContact (email) {
@@ -67,6 +66,18 @@ class CordialApi {
       }
       console.log('Something went wrong: ', exception)
     }
+  }
+
+  async getEventsByContact (email, perPage = 5) {
+    const encodedEmail = encodeURIComponent(email.toLowerCase());
+    const settings = {
+      url: `${this.apiUrlContactActivities}?email=${encodedEmail}&per_page=${perPage}&return_count=false&sort_dir=desc`,
+      headers: auth_headers,
+      secure: true,
+      type: 'GET'
+    };
+
+    return (await this.client.request(settings))
   }
 
 }
