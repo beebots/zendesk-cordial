@@ -3,6 +3,8 @@ import SubscriptionStatus from './SubscriptionStatus'
 import CustomerInfo from './CustomerInfo'
 import SubscriberEvents from './SubscriberEvents'
 import { Paragraph } from '@zendeskgarden/react-typography'
+import { Spinner } from '@zendeskgarden/react-loaders'
+import { Col, Row } from '@zendeskgarden/react-grid'
 
 const Main = (props) => {
   if (!props.requester.email) {
@@ -10,13 +12,16 @@ const Main = (props) => {
   }
 
   const [cordialContact, setCordialContact] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   function updateContactData(){
     props.cordialApi.getContact(props.requester.email)
       .then((data) => {
+        setIsLoading(false)
         setCordialContact(data)
       })
       .catch((error) => {
+        setIsLoading(false)
         if (error.status !== 404) {
           console.log('Error while getting a Cordial contact', error)
         }
@@ -31,8 +36,23 @@ const Main = (props) => {
     updateContactData()
   }, [props.requester.email])
 
-  return cordialContact !== null
-    ? (
+  if (isLoading) {
+    return (
+      <Row alignItems="center">
+        <Col textAlign="center">
+          <Spinner className="loader" size="32" />
+        </Col>
+      </Row>
+    )
+  }
+
+  if (cordialContact === null) {
+    return (
+      <Paragraph>No Cordial Data Available</Paragraph>
+    )
+  }
+
+  return (
       <div className="app">
         <CustomerInfo
           email={props.requester.email}
@@ -56,9 +76,6 @@ const Main = (props) => {
           resizeHelper={props.windowResizeHelper}
         />
       </div>
-  )
-  : (
-    <Paragraph>No Cordial Data Available</Paragraph>
   )
 }
 
