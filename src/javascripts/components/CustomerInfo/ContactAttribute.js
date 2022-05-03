@@ -5,9 +5,9 @@ import ViewText from './ContactAttribute/View/ViewText'
 const ContactAttribute = (props) => {
   return (
     <div>
-      { typeof props.type !== 'string'
-        && typeof props.type !== 'number'
-        ? <MD>Unsupported contact attribute type {props.type}</MD>
+      { props.type !== 'string'
+        && props.type !== 'number'
+        ? <MD hue="red"><MD tag="strong" isBold>{props.contactAttributeKey}:</MD> Unsupported contact attribute type <MD tag="strong" isBold>{props.type}</MD></MD>
         : <MD>
           { props.isEditing
             ? <EditText
