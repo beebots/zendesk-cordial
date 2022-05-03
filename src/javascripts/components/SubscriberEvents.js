@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { LG, MD, UnorderedList } from '@zendeskgarden/react-typography'
 import { Dots } from '@zendeskgarden/react-loaders'
 
@@ -16,13 +16,16 @@ const SubscriberEvents = (props) => {
             time: new Date(eventData.time)
           }
         }))
-        props.resizeHelper.resize()
       })
       .catch((error) => {
         setIsLoading(false)
         console.log(error)
       })
   }, [props.email, props.cordialContact]) // Only run use effect if one of these change
+
+  useLayoutEffect(() => {
+    props.resizeHelper.resize()
+  })
 
   return (
     <div className="mb-4">

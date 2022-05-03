@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { LG, Paragraph } from '@zendeskgarden/react-typography'
 import { Button, IconButton } from '@zendeskgarden/react-buttons'
-import PencilIcon from '@zendeskgarden/svg-icons/src/16/pencil-stroke.svg';
+import PencilIcon from '@zendeskgarden/svg-icons/src/16/pencil-stroke.svg'
 import ContactAttribute from './CustomerInfo/ContactAttribute'
+import { Dots } from '@zendeskgarden/react-loaders'
+import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
 
 const CustomerInfo = (props) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -15,8 +17,11 @@ const CustomerInfo = (props) => {
       return
     }
     setIsEditing(true)
-
   }
+
+  useLayoutEffect(() => {
+    props.resizeHelper.resize()
+  })
 
   function initializeContactAttributeValues(){
     return props.allowedContactAttributes.reduce((result, contactAttribute) => {
@@ -78,6 +83,13 @@ const CustomerInfo = (props) => {
   return (
     <div className="mb-2">
       <Paragraph>{props.email}</Paragraph>
+      { messages.map((message, index) =>
+        <Alert key={index} className="my-1" type={message.type}>
+          <Title>{message.title}</Title>
+          {message.value}
+          <Close aria-label="Close Alert" />
+        </Alert>
+      )}
       <LG tag="h2" isBold>
         Contact Info
         {' '}
@@ -98,7 +110,12 @@ const CustomerInfo = (props) => {
       })}
       { isEditing &&
         <div>
-          <Button isPrimary onClick={handleContactAttributeSave}>Save</Button>
+          <Button isPrimary onClick={handleContactAttributeSave}>
+            { isLoading
+              ? <span>Saving <Dots /></span>
+              : <span>Save</span>
+            }
+          </Button>
           {' '}
           <Button isBasic onClick={toggleEdit}>Cancel</Button>
         </div>

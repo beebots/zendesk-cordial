@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import SubscriptionStatus from './SubscriptionStatus'
 import CustomerInfo from './CustomerInfo'
 import SubscriberEvents from './SubscriberEvents'
@@ -8,7 +8,7 @@ const Main = (props) => {
     return (<p>No requester email available on the ticket</p>);
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     props.windowResizeHelper.resize()
   })
 
@@ -25,12 +25,14 @@ const Main = (props) => {
         cordialApi={props.cordialApi}
         allowedContactAttributes={props.allowedContactAttributes}
         onCordialContactUpdate={onCordialContactUpdate}
+        resizeHelper={props.windowResizeHelper}
       />
       <SubscriptionStatus
         email={props.requester.email}
         cordialContact={props.cordialContact}
         cordialApi={props.cordialApi}
         onCordialContactUpdate={onCordialContactUpdate}
+        resizeHelper={props.windowResizeHelper}
       />
       <SubscriberEvents
         email={props.requester.email}

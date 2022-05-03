@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { capitalize } from '../lib/helpers'
 import PencilIcon from '@zendeskgarden/svg-icons/src/16/pencil-stroke.svg'
 import { Field, Label, Radio } from '@zendeskgarden/react-forms'
@@ -36,6 +36,10 @@ const SubscriptionStatus = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [messages, setMessages] = useState([])
+
+  useLayoutEffect(() => {
+    props.resizeHelper.resize()
+  })
 
   const saveSubscribeStatus = () => {
     if (!props.email) {
@@ -144,7 +148,7 @@ const SubscriptionStatus = (props) => {
                 <Button onClick={saveSubscribeStatus}>
                   { isLoading
                     ? <span>Saving <Dots /></span>
-                    : <>Save</>
+                    : <span>Save</span>
                   }
                 </Button>
                 {' '}
