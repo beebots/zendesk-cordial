@@ -10,6 +10,7 @@ const MAX_HEIGHT = 1000
 class App {
   constructor (client, appData) {
     this.client = client
+    this.appData = appData
     this.cordialApi = new CordialApi(client, appData.metadata.settings.api_url, this.allowedContactAttributes)
     this.cordialAttributeHelper = new CordialAttributeHelper(this.cordialApi, appData.metadata.settings.allowed_contact_attributes)
     this.windowResizeHelper = new WindowResizeHelper(client, MAX_HEIGHT)
@@ -30,27 +31,18 @@ class App {
     }
 
     const ticketRequester = ticketRequesterData['ticket.requester']
-    let cordialContact = null
-    try {
-      cordialContact = (await this.cordialApi.getContact(ticketRequester.email))
-    } catch (exception) {
-      if (exception.status !== 404) {
-        console.log('Error while getting a Cordial contact', exception)
-      }
-    }
+
     this.allowedContactAttributes = (await this.cordialAttributeHelper.getAllowedAttributes())
-    // render application markup
     ReactDOM.render(
       <Main
         requester={ticketRequester}
-        cordialContact={cordialContact}
         cordialApi={this.cordialApi}
         allowedContactAttributes={this.allowedContactAttributes}
         windowResizeHelper={this.windowResizeHelper}
+        appData={this.appData}
       />,
       document.getElementById('main')
     )
-    //return resizeContainer(this.client, MAX_HEIGHT)
   }
 
   /**
