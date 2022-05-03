@@ -36,6 +36,13 @@
       "secure": false,
       "required": false,
       "default": "first_name\nlast_name"
+    },
+    {
+      "name": "enable_events",
+      "type": "checkbox",
+      "secure": false,
+      "required": false,
+      "default": "false"
     }
   ],
   "version": "1.0",

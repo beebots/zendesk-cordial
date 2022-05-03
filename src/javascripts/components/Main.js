@@ -69,12 +69,14 @@ const Main = (props) => {
           onCordialContactUpdate={onCordialContactUpdate}
           resizeHelper={props.windowResizeHelper}
         />
-        <SubscriberEvents
-          email={props.requester.email}
-          cordialApi={props.cordialApi}
-          cordialContact={cordialContact}
-          resizeHelper={props.windowResizeHelper}
-        />
+        {props.appData.metadata.settings.enable_events &&
+          <SubscriberEvents
+            email={props.requester.email}
+            cordialApi={props.cordialApi}
+            cordialContact={cordialContact}
+            resizeHelper={props.windowResizeHelper}
+          />
+        }
       </div>
   )
 }
