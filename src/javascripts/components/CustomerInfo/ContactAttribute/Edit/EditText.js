@@ -6,7 +6,7 @@ const EditText = (props) => {
     <div className="mb-2">
       <Field>
         <Label>{props.label}</Label>
-        <Input value={props.value} />
+        <Input value={props.value} onChange={(event) => props.updateContactAttribute(props.contactAttributeKey, event)} />
       </Field>
     </div>
   )
