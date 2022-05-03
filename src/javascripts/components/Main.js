@@ -4,6 +4,10 @@ import CustomerInfo from './CustomerInfo'
 import SubscriberEvents from './SubscriberEvents'
 
 const Main = (props) => {
+  if (!props.requester.email) {
+    return (<p>No requester email available on the ticket</p>);
+  }
+
   const onCordialContactUpdate = () => {
     console.log('cordial contact was updated!')
   }
@@ -19,12 +23,16 @@ const Main = (props) => {
         onCordialContactUpdate={onCordialContactUpdate}
       />
       <SubscriptionStatus
-        requester={props.requester}
+        email={props.requester.email}
         cordialContact={props.cordialContact}
         cordialApi={props.cordialApi}
         onCordialContactUpdate={onCordialContactUpdate}
       />
-      <SubscriberEvents />
+      <SubscriberEvents
+        email={props.requester.email}
+        cordialApi={props.cordialApi}
+        cordialContact={props.cordialContact}
+      />
     </div>
   )
 }

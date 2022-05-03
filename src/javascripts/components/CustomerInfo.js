@@ -42,9 +42,6 @@ const CustomerInfo = (props) => {
   }
 
   function handleContactAttributeSave(){
-    if (!props.email) {
-      return
-    }
     const email = props.email.toLowerCase()
     const data = {
       channels: {

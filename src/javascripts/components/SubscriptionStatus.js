@@ -17,10 +17,6 @@ const UNSUBSCRIBED = 'unsubscribed'
 const NONE = 'none'
 
 const SubscriptionStatus = (props) => {
-  if (!props.requester) {
-    return (<p>No requester email available</p>);
-  }
-
   const [subscribeStatus, setSubscribeStatus] = useState(props.cordialContact
     ? props.cordialContact.channels.email.subscribeStatus
     : null
@@ -42,10 +38,10 @@ const SubscriptionStatus = (props) => {
   const [messages, setMessages] = useState([])
 
   const saveSubscribeStatus = () => {
-    if (!props.requester.email) {
+    if (!props.email) {
       return
     }
-    const email = props.requester.email.toLowerCase()
+    const email = props.email.toLowerCase()
     const data = {
       channels: {
         email: {
