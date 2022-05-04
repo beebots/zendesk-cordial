@@ -108,7 +108,7 @@ const SubscriptionStatus = (props) => {
       </LG>
         <div className="mb-4">
           <p className="mb-4">{ subscribeStatus
-            ? <span>{capitalize(subscribeStatus)}{subscribeStatusDate && <> on {subscribeStatusDate.toLocaleTimeString()}</>}</span>
+            ? <span>{capitalize(subscribeStatus)}{subscribeStatusDate && <> on {subscribeStatusDate.toLocaleDateString()} at {subscribeStatusDate.toLocaleTimeString()}</>}</span>
             : <span>This email is not in Cordial</span>
           }
           </p>
