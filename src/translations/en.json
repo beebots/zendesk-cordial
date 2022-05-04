@@ -1,10 +1,16 @@
 {
   "app": {
-    "name": "Example App",
-    "short_description": "Short Description",
-    "long_description": "Long Description",
+    "name": "Cordial",
+    "short_description": "Zendesk Cordial Support App",
+    "long_description": "This app allows users to subscribe/unsubscribe cordial contacts as well as update any specified contact attributes",
     "installation_instructions": "Configure the following app settings, then click Install:...",
-    "title": "Example App"
+    "title": "Cordial",
+    "parameters": {
+      "api_url": { "label" :  "API URL", "helpText": "Usually https://api.cordial.io or https://api.usw2.cordial.io"},
+      "api_token": { "label" :  "API Token", "helpText": "You can get your API token from the Cordial Admin under the account dropdown API Keys. Generate your token by base 64 encoding your token with a colon at the end (Basic Auth with the key as the user and an empty password). Example you can run to generate your token in your browser's javascript console: btoa(YOUR_TOKEN + ':')"},
+      "allowed_contact_attributes": { "label": "Allowed Contact Attributes", "helpText": "Add each contact attribute key you want to display on separate lines"},
+      "enable_events": {"label": "Enable Events (Beta)", "helpText": "Whether or not you would like to display a contact's event data"}
+    }
   },
   "default": {
     "organizations": "organizations"
