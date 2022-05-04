@@ -1,9 +1,7 @@
 import React from 'react'
-import { LG, MD, Paragraph } from '@zendeskgarden/react-typography'
-import { IconButton } from '@zendeskgarden/react-buttons'
-import PencilIcon from '@zendeskgarden/svg-icons/src/16/pencil-stroke.svg';
-import { Field, Label, Input } from '@zendeskgarden/react-forms'
-const ContactAttribute = (props) => {
+import { MD } from '@zendeskgarden/react-typography'
+
+const ViewText = (props) => {
   return (
     <div>
       <MD tag="strong" isBold>{props.label}: </MD>
@@ -12,4 +10,4 @@ const ContactAttribute = (props) => {
   )
 }
 
-export default ContactAttribute
+export default ViewText

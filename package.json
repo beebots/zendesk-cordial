@@ -1,7 +1,6 @@
 {
   "author": "Zendesk",
   "dependencies": {
-    "@zendeskgarden/react-forms": "^8.49.4",
     "core-js": "^3.22.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
@@ -17,6 +16,7 @@
     "@zendeskgarden/css-forms": "^6.0.5",
     "@zendeskgarden/css-tables": "^3.0.5",
     "@zendeskgarden/react-buttons": "^8.49.4",
+    "@zendeskgarden/react-forms": "^8.49.4",
     "@zendeskgarden/react-grid": "^8.49.4",
     "@zendeskgarden/react-loaders": "^8.49.4",
     "@zendeskgarden/react-notifications": "^8.49.4",
