@@ -67,7 +67,8 @@
     "lint": "standard",
     "start": "zcli apps:server ./dist",
     "test": "jest",
-    "watch": "webpack --watch --mode=development"
+    "watch": "webpack --watch --mode=development",
+    "zip": "zip -r dist.zip dist"
   },
   "version": "1.0.1"
 }
