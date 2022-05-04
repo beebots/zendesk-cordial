@@ -9,6 +9,9 @@ class CordialAttributeHelper {
   }
 
   async getAllowedAttributes () {
+    if (!this.allowedContactAttributesKeys) {
+      return []
+    }
     const allCordialContactAttributes = (await this.cordialApi.getAllContactAttributes())
     return this.allowedContactAttributesKeys.map(attributeKey => allCordialContactAttributes[attributeKey] ?? false)
   }

@@ -34,8 +34,7 @@
       "name": "allowed_contact_attributes",
       "type": "multiline",
       "secure": false,
-      "required": false,
-      "default": "first_name\nlast_name"
+      "required": false
     },
     {
       "name": "enable_events",

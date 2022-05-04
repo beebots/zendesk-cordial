@@ -90,13 +90,15 @@ const CustomerInfo = (props) => {
           <Close aria-label="Close Alert" />
         </Alert>
       )}
-      <LG tag="h2" isBold>
-        Contact Info
-        {' '}
-        <IconButton onClick={toggleEdit} aria-label="Edit" >
-          <PencilIcon />
-        </IconButton>
-      </LG>
+      { Object.entries(contactAttributeValues).length > 0 &&
+        <LG tag="h2" isBold>
+          Contact Info
+          {' '}
+          <IconButton onClick={toggleEdit} aria-label="Edit" >
+            <PencilIcon />
+          </IconButton>
+        </LG>
+      }
       { Object.entries(contactAttributeValues).map(([contactAttributeKey,contactAttribute],index) => {
         return <ContactAttribute
           key={index}
