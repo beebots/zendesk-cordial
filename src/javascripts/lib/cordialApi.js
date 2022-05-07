@@ -47,6 +47,18 @@ class CordialApi {
     return (await this.client.request(settings))
   }
 
+  async deleteContact (email) {
+    const encodedEmail = encodeURIComponent(email.toLowerCase());
+    const settings = {
+      url: `${this.apiUrlContact}/email:${encodedEmail}`,
+      headers: auth_headers,
+      secure: true,
+      type: 'DELETE'
+    };
+
+    return (await this.client.request(settings))
+  }
+
   async getAllContactAttributes () {
     const settings = {
       url: `${this.apiUrlContactAttributes}`,

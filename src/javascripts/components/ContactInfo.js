@@ -6,7 +6,7 @@ import ContactAttribute from './CustomerInfo/ContactAttribute'
 import { Dots } from '@zendeskgarden/react-loaders'
 import { Alert, Close, Title } from '@zendeskgarden/react-notifications'
 
-const CustomerInfo = (props) => {
+const ContactInfo = (props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [messages, setMessages] = useState([])
@@ -82,7 +82,6 @@ const CustomerInfo = (props) => {
 
   return (
     <div className="mb-2">
-      <Paragraph>{props.email}</Paragraph>
       { messages.map((message, index) =>
         <Alert key={index} className="my-1" type={message.type}>
           <Title>{message.title}</Title>
@@ -126,4 +125,4 @@ const CustomerInfo = (props) => {
   )
 }
 
-export default CustomerInfo
+export default ContactInfo

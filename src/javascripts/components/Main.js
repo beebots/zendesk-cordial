@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import SubscriptionStatus from './SubscriptionStatus'
-import CustomerInfo from './CustomerInfo'
+import ContactInfo from './ContactInfo'
 import SubscriberEvents from './SubscriberEvents'
 import { Paragraph } from '@zendeskgarden/react-typography'
 import { Spinner } from '@zendeskgarden/react-loaders'
 import { Col, Row } from '@zendeskgarden/react-grid'
+import ContactEmail from './ContactEmail'
 
 const Main = (props) => {
   if (!props.requester.email) {
@@ -17,10 +18,13 @@ const Main = (props) => {
   function updateContactData(){
     props.cordialApi.getContact(props.requester.email)
       .then((data) => {
-        setIsLoading(false)
         setCordialContact(data)
+        setIsLoading(false)
       })
       .catch((error) => {
+        if (error.status === 404) {
+          setCordialContact(null)
+        }
         setIsLoading(false)
         if (error.status !== 404) {
           console.log('Error while getting a Cordial contact', error)
@@ -29,6 +33,7 @@ const Main = (props) => {
   }
 
   const onCordialContactUpdate = () => {
+    setIsLoading(true)
     updateContactData()
   }
 
@@ -54,7 +59,12 @@ const Main = (props) => {
 
   return (
       <div className="app">
-        <CustomerInfo
+        <ContactEmail
+          email={props.requester.email}
+          cordialApi={props.cordialApi}
+          onCordialContactUpdate={onCordialContactUpdate}
+        />
+        <ContactInfo
           email={props.requester.email}
           cordialContact={cordialContact}
           cordialApi={props.cordialApi}
