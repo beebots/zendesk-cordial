@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Cordial",
+    "name": "Cordial Support",
     "short_description": "Zendesk Cordial Support App",
     "long_description": "This app allows users to subscribe/unsubscribe cordial contacts as well as update any specified contact attributes",
     "installation_instructions": "Configure the following app settings, then click Install:...",

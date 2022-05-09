@@ -59,7 +59,7 @@ const ContactEmail = (props) => {
       <MD>{props.email}</MD>
       {isDeleteConfirmVisible &&
         <div>
-          <MD hue="red" className="mb-2">Are you sure you would like to permanently remove this contact from Cordial?</MD>
+          <MD hue="red" className="mb-2">Are you sure you would like to remove this contact and all of their data from Cordial?</MD>
           <Button isPrimary isDanger onClick={deleteContact}>
             { isLoading
               ? <span>Deleting <Dots /></span>
